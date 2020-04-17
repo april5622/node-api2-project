@@ -21,6 +21,7 @@ router.post("/", (req, res) => {
                     errorMessage: "There was an error while saving the post to the database"
                 })
         })
+    
 })
 
 
@@ -28,7 +29,7 @@ router.post("/", (req, res) => {
 router.post("/:id/comments", (req, res) => {
     db.findById(req.params.id)
         .then((post) => {
-                res.json(post)
+                res.status(200).json(post)
             })
         .catch((error) => {
             console.log(error)
@@ -149,7 +150,7 @@ router.put("/:id", (req, res) => {
     db.update(req.params.id, req.body)
         .then((post)=> {
             if(post){
-                res.status(200).json(user)
+                res.status(200).json(post)
             }else{
                 res.status(404).json({
                     errorMessage: "The post with the specified ID does not exist."
